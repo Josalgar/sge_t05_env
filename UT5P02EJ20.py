@@ -9,9 +9,14 @@
 #    • No se puede dividir por cero. Si detecta que va a ocurrir eso, se da un aviso y se vuelve a pedir un valor válido.
 #    • Cualquier otro error. Si ocurre un error inesperado, se da un aviso y se vuelve a pedir el valor.
 
+from locale import format_string
+
+
 def menu(opcion):
     match opcion:
         case 1:
+            
+            
             sumar()
         case 2:
             restar()
@@ -23,44 +28,38 @@ def menu(opcion):
             potencia()
         case 6:
             print("Ha seleccionado salir.")
-        #    print("El programa ha terminado")
+            print("El programa ha terminado")
         #    exit()
         case _:
             print("La opción indicada no es válida, por favor, indique una opción correcta.")
         
 
-
-
-
-def sumar():
-
-    while True:
-        try:
-            numero1 = int(input("Indique un valor entero para el número 1: "))
-                        
-        except ValueError:
-            print ("El valor asignado no es válido, por favor, asigne otro.")
-            continue
-        else:
-            break
+def pedirNum():
+    try:
+        numero1 = int(input("Indique un valor entero para el número 1: "))
         
-    while True:    
-        try:
-            
-            numero2 = int(input("Indique un valor entero para el número 2: "))
-            
-        except ValueError:
-            print ("El valor asignado no es válido, por favor, asigne otro.")
-            continue
-        else:
-            break
+                        
+    except ValueError:
+        print ("El valor asignado no es válido, por favor, asigne otro.")
 
-    print("La suma de ambos números es "+str(numero1+numero2))
+    
+    try:
+            
+        numero2 = int(input("Indique un valor entero para el número 2: "))
+        
+            
+    except ValueError:
+        print ("El valor asignado no es válido, por favor, asigne otro.")
+        
+    
+def sumar():
+    pedirNum()
+    print("La suma de ambos números es ",numero1+numero2)
         
 
     
 
-def restar():
+def restar(numero1,numero2):
     while True:
         try:
             numero1 = int(input("Indique un valor entero para el minuendo: "))
@@ -161,7 +160,7 @@ def potencia():
             break
     print("La potencia es "+str(base**exponente))
         
-opcion=0
+opcion=None
 while opcion!=6:
     print("Indique el número de la operación que quiere realizar:")
     print("1.- Sumar")
@@ -177,5 +176,19 @@ while opcion!=6:
             menu(opcion)
     except ValueError:
             print ("El valor asignado no es válido, por favor, asigne otro.")
+            
+try:
+            numero1 = int(input("Indique un valor entero para el número 1: "))
+                        
+except ValueError:
+            print ("El valor asignado no es válido, por favor, asigne otro.")
+
+    
+try:
+            
+        numero2 = int(input("Indique un valor entero para el número 2: "))
+            
+except ValueError:
+        print ("El valor asignado no es válido, por favor, asigne otro.")
 else:
     print("El programa ha finalizado.")

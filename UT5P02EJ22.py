@@ -4,6 +4,8 @@
 #Finalmente el script determina si hay elementos duplicados o no en dicha lista y después si la lista está ordenada o no alfabéticamente.
 
 import collections
+from locale import format_string
+from pickle import TRUE
 
 def hayDuplicados (lista):
     
@@ -13,13 +15,22 @@ def hayDuplicados (lista):
         print("No hay valores duplicados en la lista.")
         
 def estaOrdenadaAlfabeticamente(lista):
-    listaOrdenada=lista[:]
+    #Corrección de como lo había planteado
+    '''listaOrdenada=lista[:]
     listaOrdenada.sort()
-    if len(lista)!=len(listaOrdenada):
+    if lista!=listaOrdenada:
         print("La lista no está ordenada alfabeticamente.")
         
     else:
-        print("La lista está ordenada alfabéticamente.")
+        print("La lista está ordenada alfabéticamente.")'''
+    
+    #Planteamiento según tus indicaciones
+    for i in range(len(lista)-1):
+        if (lista[i]>lista[i+1]):
+            return False
+    
+    return True
+            
         
     
 
@@ -36,4 +47,7 @@ while valores!="salir" :
 print(listaValores)
 
 hayDuplicados(listaValores)
-estaOrdenadaAlfabeticamente(listaValores)
+if estaOrdenadaAlfabeticamente(listaValores)==True:
+    print("La lista está ordenada alfabéticamente")
+else:
+    print("La lista NO está ordenada alfabéticamente")

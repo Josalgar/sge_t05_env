@@ -1,6 +1,6 @@
+import os
 from datetime import datetime
-
-class Fecha(object):
+class Fecha:
     
    dia=None
    mes=None
@@ -12,10 +12,8 @@ class Fecha(object):
       self.agno=agno
 
 
-   def fActual(self,dia,mes,agno):
-      self.dia=dia.now("%d")
-      self.mes=mes.now("%m")
-      self.agno=agno.now("%y")
-      return self(dia,mes,agno)
+   def fActual(self):
+      fechaActual=datetime.now()
+      return self(fechaActual.day,fechaActual.month,fechaActual.year)
    
    fechaAct=Fecha().fActual()
