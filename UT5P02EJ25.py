@@ -1,39 +1,43 @@
+from pickle import FALSE
+
+
 class Punto:
     X=None
     Y=None
     
-    def _init_(self,X=0,Y=0):
+    def __init__(self,X=0,Y=0):
         self.X=X
         self.Y=Y
         
     def __str__(self):
-        coordenada="(self.X,self.Y)"
+        coordenada="(%d,%d)" % (self.X, self.Y)
         return coordenada
     
     def cuadrante(self):
-        if self.x==0 & self.y!=0:
+        if (self.X==0 and self.Y!=0):
             print("La coordenada está en el eje Y.")
-        elif self.x!=0 & self.y==0:
+        elif (self.X!=0 and self.Y==0):
             print("La coordenada está en el eje X.")
-        elif self.x==0 & self.y==0:
+        elif (self.X==0 and self.Y==0):
             print("La coordenada está en el origen.")
-        elif self.x>0 & self.y>0:
+        elif (self.X>0 and self.Y>0):
             print("La coordenada está en el cuadrante 1.")
-        elif self.x>0 & self.y<0:
+        elif (self.X>0 and self.Y<0):
             print("La coordenada está en el cuadrante 4.")
-        elif self.x<0 & self.y>0:
+        elif (self.X<0 and self.Y>0):
             print("La coordenada está en el cuadrante 2.")
-        elif self.x<0 & self.y<0:
+        elif (self.X<0 and self.Y<0):
             print("La coordenada está en el cuadrante 3.")
         else:
             print("Coordenadas erróneas")
             
     def vector(self,puntoB):
-        print("El vector resultante de los puntos facilitados es "+(puntoB.X-self.X,puntoB.Y-self.Y))
+        vtor=puntoB.X-self.X,puntoB.Y-self.Y
+        print("El vector resultante de los puntos facilitados es "+format(vtor))
     
     def distancia(self, puntoB):
         dist=((puntoB.X-self.X)**2+(puntoB.Y-self.Y)**2)**0.5
-        print("La distancia entre los puntos facilitados es "+dist)
+        print("La distancia entre los puntos facilitados es "+format(dist))
         
 
 class Rectangulo:
@@ -41,73 +45,70 @@ class Rectangulo:
         self.pInicial=pInicial
         self.pFinal=pFinal
         
-    def es_rectangulo(self,puntoB):
-        if self.X-puntoB.X!=0 & self.Y-puntoB.Y!=0 :
-            print("Los puntos pueden formar un rectángulo")
-        elif (self.X-puntoB.X) == (self.Y-puntoB.Y9):
-            print("Los puntos dados forman un cuadrado")
+    def es_rectangulo(self):
+        if self.pInicial.X-self.pFinal.X!=0 and self.pInicial.Y-self.pFinal.Y!=0 :
+            return True
+       
         else:
-            print("Los puntos dados no forman un rectángulo")
+            return False
         
-    def base(self,puntoB):
-        base=0
-        if self.X>puntoB.X :
-            base=self.X-puntoB.X
-            print("La base del rectángulo es "+base)
-        elif self.X<puntoB.X :
-            base=puntoB.X-self.X
-            print("La base del rectángulo es "+base)
-        else:
-            print("La base es 0")
-    
-    def altura(self,puntoB):
-        altura=0
-        if self.Y>puntoB.Y:
-            altura=self.Y-puntoB.Y
-            print("La altura del rectángulo es "+altura)
-        elif self.Y<puntoB.Y:
-            altura=puntoB.Y-self.Y
-            print("La altura del rectángulo es "+altura)
-        else:
-            print("La altura es 0")
-        
-    
-    def area(self,puntoB):
-        base=0
-        if self.X>puntoB.X :
-            base=self.X-puntoB.X
+    def base(self):
+        base=None
+        if self.pInicial.X>self.pFinal.X :
+            base=self.pInicial.X-self.pFinal.X
             return base
-        elif self.X<puntoB.X :
-            base=puntoB.X-self.X
+        elif self.pInicial.X<self.pFinal.X :
+            base=self.pFinal.X-self.pInicial.X
             return base
         else:
-            print("La base es 0")
-            
+            return base
+    
+    def altura(self):
         altura=0
-        if self.Y>puntoB.Y:
-            altura=self.Y-puntoB.Y
-            print("La altura del rectángulo es "+altura)
-        elif self.Y<puntoB.Y:
-            altura=puntoB.Y-self.Y
-            print("La altura del rectángulo es "+altura)
+        if self.pInicial.Y>self.pFinal.Y:
+            altura=self.pInicial.Y-self.pFinal.Y
+            return altura
+        elif self.pInicial.Y<self.pFinal.Y:
+            altura=self.pFinal.Y-self.pInicial.Y
+            return altura
         else:
-            print("La altura es 0")
+            return altura
+        
+    
+    def area(self):
+        area=self.base()*self.altura()
+        print("El área del rectángulo que forman los puntos es "+format(area))
+        
+        
 punto1=None 
 punto2=None
+puntosDistintos=False
       
-print("Facilita las coordenadas del eje X para el punto 1")    
-X=input()
-print("Facilita las coordenadas del eje Y para el punto 1")    
-Y=input()
+print("Facilita las coordenadas del eje X para el punto 1: ")    
+X=int(input())
+print("Facilita las coordenadas del eje Y para el punto 1: ")    
+Y=int(input())
 
-punto1=Punto(X,Y)
+punto1= Punto(X,Y)
+print("Punto1:",punto1)
 
-while punto2.X==punto1.X and punto2.Y==punto1.Y :
-    print("Facilita las coordenadas del eje X para el punto 2")    
-    X2=input()
-    print("Facilita las coordenadas del eje Y para el punto 2")    
-    Y2=input()
-    punto2=Punto(X2,Y2)
+
+
+while (not puntosDistintos):
+    print("Facilita las coordenadas del eje X para el punto 2: ")    
+    X=int(input())
+    print("Facilita las coordenadas del eje Y para el punto 2: ")    
+    Y=int(input())
+    punto2= Punto(X,Y)
+    
+    
+    if punto2.X==punto1.X and punto2.Y==punto1.Y :
+        print("Los puntos creados no pueden tener las mismas coordenadas")
+    else:
+        puntosDistintos=True
+
+print("Punto 2:",punto2)
+
 opcion=None
 subOpc=None
 while opcion!=3 :
@@ -117,7 +118,7 @@ while opcion!=3 :
     print("2.- Operaciones con rectángulos.")
     print("3.- Salir")
     opcion=input()
-    if opcion==1 :
+    if opcion=="1" :
         print("Elige una opción del submenú de Operaciones con puntos")
         print("Submenu")
         print("a. Mostrar cuadrante al que pertencen.")
@@ -126,15 +127,18 @@ while opcion!=3 :
         subOpc=input()
             
         if subOpc=="a":
-            Punto.cuadrante
+            print("Punto 1: ")
+            punto1.cuadrante()
+            print("Punto 2: ")
+            punto2.cuadrante()
         elif subOpc=="b" :
-            Punto.vector
+            punto1.vector(punto2)
         elif subOpc=="c" :
-            Punto.distancia
+            punto1.distancia(punto2)
         else:
             print("Opción no válida.")  
 
-    elif opcion==2 :
+    elif opcion=="2" :
         print("Elige una opción del submenú de Operaciones con rectángulos")
         print("Submenu")
         print("a. Calcular la base.")
@@ -142,15 +146,19 @@ while opcion!=3 :
         print("c. Calcular el área.")
         subOpc=input()
         
-        if (subOpc=="a") :
-            Rectangulo.base
-        elif subOpc=="b" :
-            Rectangulo.altura    
-        elif subOpc=="c" :
-            Rectangulo.area    
+        if Rectangulo(punto1,punto2).es_rectangulo==True:
+            if (subOpc=="a") :
+           
+                print("La base es ",Rectangulo(punto1,punto2).base())
+            elif subOpc=="b" :
+                print("La altura es ",Rectangulo(punto1,punto2).altura())  
+            elif subOpc=="c" :
+                Rectangulo(punto1,punto2).area()    
+            else:
+                print("Opción no válida.") 
         else:
-            print("Opción no válida.")     
-    elif opcion==3 :
+            print("La operación no se puede realizar, los puntos no forman un rectángulo")    
+    elif opcion=="3" :
         print("Ha salido de la aplicación.")
         exit()
         
